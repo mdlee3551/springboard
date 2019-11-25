@@ -1,0 +1,23 @@
+# For Q1 answer
+SELECT name, membercost FROM facilities
+query = Facility.select(Facility.name,Facility.membercost)
+for facility in query:
+  print(facility.name)
+ 
+SELECT * FROM facilities WHERE membercost >0
+query = Facility.select().where(Facility.membercost >0)
+
+# For Q2 answer
+SELECT * FROM facilities WHERE membercost <0
+query = Facility.select().where(Facility.membercost <0)
+
+# For Q3 answer
+SELECT facid, name, membercost, monthlymaintenance
+FROM facilities
+WHERE membercost > 0 AND membercost < (monthlymaintenance / 20)
+query = (Facility
+         .select(Facility.facid, Facility.name, Facility.membercost,
+                 Facility.monthlymaintenance)
+         .where(
+             (Facility.membercost > 0) &
+             (Facility.membercost < (Facility.monthlymaintenance / 20))))
