@@ -77,8 +77,12 @@ formatted as a single column. Ensure no duplicate data, and order by
 the member name. */
 
 
-SELECT * FROM `Members` WHERE name LIKE 'Tennis%'
-ORDER BY member
+SELECT DISTINCT Facilities.name, CONCAT( Members.firstname, ' ', Members.surname ) AS member_name
+FROM Bookings
+JOIN Facilities ON Bookings.facid = Facilities.facid
+JOIN Members ON Bookings.memid = Members.memid
+WHERE Facilities.name LIKE '%Tennis Court%'
+ORDER BY member_name
 
 /* Q8: How can you produce a list of bookings on the day of 2012-09-14 which
 will cost the member (or guest) more than $30? Remember that guests have
@@ -87,12 +91,43 @@ the guest user's ID is always 0. Include in your output the name of the
 facility, the name of the member formatted as a single column, and the cost.
 Order by descending cost, and do not use any subqueries. */
 
-
+SELECT name, CONCAT( firstname, ' ', surname ) AS member_name,
+CASE WHEN Bookings.memid =0
+THEN guestcost * slots
+ELSE membercost * slots
+END AS cost
+FROM Bookings
+JOIN Facilities ON Bookings.facid = Facilities.facid
+JOIN Members ON Bookings.memid = Members.memid
+WHERE starttime LIKE '%2012-09-14%' AND ((guestcost * slots >30 AND Bookings.memid =0) OR (membercost * slots >30
+AND Bookings.memid !=0))
+ORDER BY cost DESC
 
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 
+SELECT member, facility, cost from (
+SELECT m.firstname || ' ' || m.surname as member,
+f.name as facility,
+CASE WHEN m.memid = 0 THEN b.slots * f.guestcost
+ELSE b.slots * f.membercost END AS cost
+FROM Members AS m
+INNER JOIN Bookings AS b ON m.memid = b.memid
+INNER JOIN Facilities AS f ON b.facid = f.facid
+WHERE b.starttime = '2012-09-14'
+) as bookings
+WHERE cost > 30
+ORDER BY cost DESC
 
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
 that there's a different cost for guests and members! */
+                                                                                           
+SELECT name, SUM( fee * slots ) AS revenue
+FROM (SELECT CASE WHEN Bookings.memid =0 THEN guestcost
+ELSE membercost END AS fee, slots, name
+FROM Bookings
+JOIN Facilities ON Bookings.facid = Facilities.facid) AS Booking_Fees
+GROUP BY name
+HAVING revenue <1000
+ORDER BY revenue
