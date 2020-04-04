@@ -1,2 +1,4 @@
-My goal is to be able to suggest a malignancy prediction result to patients who had exams on tumors with several features. To analyze this, I used data from . I combined the data in pandas, and took a few steps to clean it up, and run several machine learning models for prediction.
+My goal is to be able to suggest a malignancy prediction result to patients who had exams on tumors with several features. 
+To analyze this, I used data from . I combined the data in pandas, and took a few steps to clean it up, analyze and
+run several machine learning models for predictions.
  
