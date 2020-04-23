@@ -1,4 +1,9 @@
 My goal is to be able to suggest a malignancy prediction result to patients who had exams on tumors with several features. 
-To analyze this, I used data from . I combined the data in pandas, and took a few steps to clean it up, analyze and
-run several machine learning models for predictions.
+
+To analyze this, I used data from UCI machine learning repository
+(https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnost
+ic%29). 
+
+I analyzed data in pandas, and took a few steps to clean it up, analyze and
+run several machine learning models including deep learning for predictions.
  
