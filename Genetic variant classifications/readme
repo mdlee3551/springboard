@@ -1,4 +1,13 @@
+This repository includes 1) a final report (summarizes the problem, approach, final results), 2) ipython code , 3) dataset (data.csv), 4) practice codes in data analysis folder
 
+• data cleaning, wrangling, EDA, statistical analysis, logistic regression/decision tree/random forest/Gradient boosting/XGBoost modeling for machine learning.
+
+• Performed detailed analysis of feature selection, feature distribution and correlation , mined important features for decision-making, evaluated model performance (accuracy up to 0.78).
+
+• Tools used: pandas, numpy, matplotlib, seaborns, sklearn, scipy, statsmodel,classification.
+
+For the analysis, I used the dataset originally from Clinvar( https://www.ncbi.nlm.nih.gov/clinvar/ ),
+and uploaded in the Kaggle ( https://www.kaggle.com/kevinarvai/clinvar-conflicting ). 
 
 
 
