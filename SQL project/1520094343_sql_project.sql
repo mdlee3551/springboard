@@ -57,8 +57,8 @@ SELECT * FROM facilities WHERE facid IN (1, 5)
 more than $100? Return the name and monthly maintenance of the facilities
 in question. */
 
-SELECT name,
-CASE WHEN monthlymaintenance > 100 THEN 'expensive' ELSE 'cheap' END
+SELECT name, monthlymaintenance,
+CASE WHEN monthlymaintenance > 100 THEN 'expensive' ELSE 'cheap' END AS cost_label
 FROM facilities
 
 
